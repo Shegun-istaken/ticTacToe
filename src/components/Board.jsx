@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import checkWin from "../win.js";
 
 export default function Board() {
-  const [board, setBoard] = useState(Array(9)
-  .fill(0));
+  const [board, setBoard] = useState(Array(9).fill(0));
   const [history, setHistory] = useState([]);
   const [result, setResult] = useState(false);
   const [winningNo, setWinningNo] = useState();
   const [full, setFull] = useState(false);
+  const [toggleOrder, setToggleOrder] = useState(false);
 
   useEffect(() => {
     if (board.some((each) => each !== 0)) {
@@ -20,8 +20,8 @@ export default function Board() {
 
     if (board.every((each) => each !== 0)) {
       setFull(true);
-    }else{
-      setFull(false)
+    } else {
+      setFull(false);
     }
   }, [board]);
 
@@ -32,8 +32,7 @@ export default function Board() {
   }, [result]);
 
   function restart() {
-    setBoard(Array(9)
-    .fill(0)), setHistory([]);
+    setBoard(Array(9).fill(0)), setHistory([]);
   }
 
   function handleHistory(number) {
@@ -56,6 +55,10 @@ export default function Board() {
     }
   }
 
+  function rearrange() {
+    setToggleOrder(!toggleOrder);
+  }
+
   return (
     <div className="main">
       <main className="board">
@@ -72,19 +75,26 @@ export default function Board() {
           ))}
       </main>
       <div className="results">
-        <div className="history">
+        <div className={` history ${toggleOrder && "descending"}`}>
           <button onClick={restart}>Go to Game Start</button>
-          {history.map((item, index) => (
-            <button key={index} onClick={() => handleHistory(index)}>
-              {`Move ${index + 1}`}
-            </button>
-          ))}
+          {history.map((item, index) =>
+            index < history?.length - 1 ? (
+              <button key={index} onClick={() => handleHistory(index)}>
+                {`Move #${index + 1}`}
+              </button>
+            ) : (
+              <p>You are on {`Move #${index + 1}`} </p>
+            )
+          )}
         </div>
+        <button className="toggle" onClick={rearrange}>
+          Rearrange Order
+        </button>
         <div>
           {result == "X" && <h2>X Wins</h2>}
           {result == "O" && <h2>O Wins</h2>}
           {full && <h2>Draw</h2>}
-          {result || (full && <button onClick={restart}>Restart Game</button>)}
+          {result != false || full ? <button onClick={restart}>Restart Game</button>: null}
         </div>
       </div>
     </div>

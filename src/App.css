@@ -43,6 +43,10 @@ div.history{
   gap: 4px;
 }
 
+div.history.descending{
+  flex-direction: column-reverse;
+}
+
 div.results button{
   background-color: grey;
   padding: 16px;
@@ -52,4 +56,11 @@ div.results div.history button{
   background-color: grey;
   padding: 4px;
 
+}
+
+div.results button.toggle{
+  background-color: rgb(135, 88, 88);
+  color: rgb(196, 196, 196);
+  margin-top: 8px;
+  padding: 8px 8px;
 }
