@@ -1,0 +1,55 @@
+html *{
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: rgb(195, 195, 195);
+}
+
+div.main{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+main.board{
+  display: flex;
+  justify-content: flex-start;
+  width: 240px;
+  flex-wrap: wrap;
+  margin: 32px;
+}
+
+div.square{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+  height: 48px;
+  border: 1px solid black;
+}
+
+div.win{
+  background-color: rgb(95, 184, 95);
+}
+
+div.history{
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  gap: 4px;
+}
+
+div.results button{
+  background-color: grey;
+  padding: 16px;
+}
+
+div.results div.history button{
+  background-color: grey;
+  padding: 4px;
+
+}
